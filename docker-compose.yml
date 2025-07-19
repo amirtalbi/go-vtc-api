@@ -1,16 +1,20 @@
 services:
   mongo:
     image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: jefe_dz
+      MONGO_INITDB_ROOT_PASSWORD: password91_secure!
     ports:
       - "27017:27017"
     volumes:
       - .:/usr/src/app
-      - /usr/src/app/node_modules
     networks:
       - app-network
 
   api:
     build: .
+    environment:
+      - MONGODB_URI=mongodb://jefe_dz:password91_secure!@mongo:27017/auth-api?authSource=admin
     ports:
       - "3000:3000"
     volumes:

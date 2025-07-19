@@ -4,14 +4,20 @@ import { hash } from "bcrypt";
 interface IUser extends Document {
   email: string;
   password: string;
-  name: string;
+  firstname: string;
+  lastname: string;
+  verified: boolean;
+  verifyToken: string;
   hashPassword(): Promise<void>;
 }
 
 const userSchema = new Schema<IUser>({
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
-  name: { type: String, required: true },
+  firstname: { type: String, required: true },
+  lastname: { type: String, required: true },
+  verified: { type: Boolean, default: false },
+  verifyToken: { type: String },
 });
 
 userSchema.pre<IUser>("save", async function (next) {

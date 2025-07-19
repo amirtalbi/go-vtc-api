@@ -7,6 +7,7 @@ import { AuthController } from "./controllers/auth.controller";
 import { AuthService } from "./services/auth.service";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 import { LocalStrategy } from "./strategies/local.strategy";
+import { EmailModule } from '../email/email.module';
 
 @Module({
   imports: [
@@ -17,10 +18,11 @@ import { LocalStrategy } from "./strategies/local.strategy";
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get<string>("jwt.secret"),
         signOptions: {
-          expiresIn: configService.get<string>("jwt.expiresIn"),
+          expiresIn: configService.get<string>("jwt.accessTokenExpiresIn"),
         },
       }),
     }),
+    EmailModule,
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],
