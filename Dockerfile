@@ -1,5 +1,5 @@
 # Use the official Node.js 20 image with Alpine for Apple Silicon optimization
-FROM --platform=linux/arm64 node:20-alpine
+FROM --platform=linux/amd64 node:20-alpine
 
 # Install necessary build tools for native dependencies
 RUN apk add --no-cache \

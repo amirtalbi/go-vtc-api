@@ -12,7 +12,7 @@ services:
       - app-network
 
   api:
-    build: .
+    image: ghcr.io/amirtalbi/vtc-portfolio:1.0.0
     environment:
       - MONGODB_URI=mongodb://jefe_dz:password91_secure!@mongo:27017/auth-api?authSource=admin
     ports:
